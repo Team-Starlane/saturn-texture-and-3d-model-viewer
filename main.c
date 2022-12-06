@@ -23,6 +23,11 @@ void			my_draw(void)
 {
     if (jo_is_pad1_key_pressed(JO_KEY_C))
     {
+        
+        z+=z/25 +1;
+        
+        
+        /*
 		if(z > far)
 		{
 			z = z+12;
@@ -35,9 +40,18 @@ void			my_draw(void)
 		{
 			z++;
 		}
+        */
     }
     else if (jo_is_pad1_key_pressed(JO_KEY_Z))
     {
+        if (z>20){
+        z-=z/25 +1;
+        }
+        // Readding angry smiley:
+        else{z++;} 
+
+
+        /*
 		if(z > far)
 		{
 			z = z-12;
@@ -54,6 +68,7 @@ void			my_draw(void)
         {
             z++;
         }
+        */
     }
     
     // Horizontal axis.
@@ -119,7 +134,7 @@ void			my_draw(void)
     z = Z_BASE;
     }
     
-    // Setting palette every frame seems to not matter.
+    // Setting palette every frame seems not to matter.
     // Push matrix, apply transformations from button inputs, draw sprite, pop matrix.
     jo_sprite_set_palette(palette1.id);
     jo_3d_push_matrix();
@@ -158,7 +173,7 @@ void            add_image_files(void)
     jo_set_tga_palette_handling(my_tga_palette_handling);
     jo_sprite_add_tga(JO_ROOT_DIR, "B.TGA", 1);
     jo_set_tga_palette_handling(JO_NULL);
-
+/*
     jo_set_tga_palette_handling(my_tga_palette_handling);
     jo_sprite_add_tga(JO_ROOT_DIR, "C.TGA", 1);
     jo_set_tga_palette_handling(JO_NULL);
@@ -170,8 +185,8 @@ void            add_image_files(void)
     jo_set_tga_palette_handling(my_tga_palette_handling);
     jo_sprite_add_tga(JO_ROOT_DIR, "E.TGA", 1);
     jo_set_tga_palette_handling(JO_NULL);
+*/
 }
-
 void			jo_main(void)
 {
 	jo_core_init(JO_COLOR_Black);
