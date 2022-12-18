@@ -47,6 +47,26 @@ int far = 1000;
 int near = 200;
 int frustrum = 20;
 
+// Reyes stuff.
+/*
+int spriteIndex = 0;
+
+void            my_draw(void)
+{
+    jo_sprite_set_palette(spriteIndex);
+    jo_sprite_draw3D(spriteIndex, 0, 0, 500);
+}
+
+void            my_input(void)
+{
+    // Change sprite with A button
+    if (jo_is_pad1_key_pressed(JO_KEY_A))
+    {
+        spriteIndex++;
+    }
+}
+*/
+
 void			my_draw(void)
 {
     if (jo_is_pad1_key_pressed(JO_KEY_C))
