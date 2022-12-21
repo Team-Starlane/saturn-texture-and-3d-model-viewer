@@ -26,8 +26,10 @@ static jo_palette       palette8;
     B through E.tga = LOD levels 0 to 3.
 
 */ 
+#define IMG_MAX 6
 enum images{a_dot_tga, b_dot_tga, c_dot_tga, d_dot_tga, e_dot_tga, f_dot_tga};
 int img_loaded = a_dot_tga;
+int spriteIndex = 1;
 
 // Values for rotation. Base matrix rotation value and rotation frustrum.
 int rot_multiplier = 1;
@@ -49,27 +51,35 @@ int frustrum = 20;
 
 // Reyes stuff.
 /*
-int spriteIndex = 0;
-
 void            my_draw(void)
 {
     jo_sprite_set_palette(spriteIndex);
     jo_sprite_draw3D(spriteIndex, 0, 0, 500);
 }
+*/
 
-void            my_input(void)
+void			my_input(void)
 {
-    // Change sprite with A button
-    if (jo_is_pad1_key_pressed(JO_KEY_A))
+    // IMG_MAX is the number of images you put into your cd root.
+    // Cycle through all compiled images.
+    if  (jo_is_pad1_key_pressed(JO_KEY_A) && spriteIndex <= IMG_MAX)
     {
         spriteIndex++;
     }
-}
-*/
+    else if (jo_is_pad1_key_pressed(JO_KEY_A) && spriteIndex > IMG_MAX)
+    {
+        spriteIndex == 1;
+    }
+    else if (jo_is_pad1_key_pressed(JO_KEY_B) && spriteIndex >= 1)
+    {
+        spriteIndex--;
+    }
+    else if (jo_is_pad1_key_pressed(JO_KEY_B) && spriteIndex < 1)
+    {
+        spriteIndex == IMG_MAX;
+    }
 
-void			my_draw(void)
-{
-    if (jo_is_pad1_key_pressed(JO_KEY_C))
+    if  (jo_is_pad1_key_pressed(JO_KEY_C))
     {
         
         z+=(z>>2) / 25 + 1;
@@ -181,7 +191,9 @@ void			my_draw(void)
     rot_z = 0;
     z = Z_BASE;
     }
-    
+
+void        my_draw(void)
+{
     // Setting palette every frame seems not to matter.
     // Push matrix, apply transformations from button inputs, draw sprite, pop matrix.
     jo_sprite_set_palette(palette1.id);
@@ -202,7 +214,7 @@ void			my_draw(void)
     jo_clear_screen_line(6);
     jo_printf(0, 0, "Press Start to reset all values.");
     jo_printf(0, 2, "Z-depth (press C or Z): %d", z);
-    jo_printf(0, 3, "Cycle images with A & B: Img. Nr.: %d", img_loaded);
+    jo_printf(0, 3, "Cycle images with A & B: Img. Nr.: %d", spriteIndex);
     jo_printf(0, 4, "Rotat. on x (press Up or Down): %d", rot_x);
     jo_printf(0, 5, "Rotat. on y (press Left or Right): %d", rot_y);
     jo_printf(0, 6, "Rotat. on z (press L or R trigger): %d", rot_z);
@@ -279,6 +291,7 @@ void			jo_main(void)
 	jo_core_init(JO_COLOR_Black);
 
     add_image_files();
+    jo_core_add_callback(my_input);
     jo_core_add_callback(my_draw);
 
 	jo_core_run();
