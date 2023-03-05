@@ -1,4 +1,9 @@
 #include <jo/jo.h>
+// Include everything this .h file lists, which is XL2's entire ZTP library.
+// Take it from this subfolder.
+// IMPORTANT: Do not write file extensions in capital letters in Linux! Case sensitive OS.
+#include "ZT/ZT_COMMON.h"
+#include "island.h"
 
 /*  Image variables.
     
@@ -29,7 +34,7 @@ static jo_palette       palette8;
 #define IMG_MAX 6
 enum images{a_dot_tga, b_dot_tga, c_dot_tga, d_dot_tga, e_dot_tga, f_dot_tga};
 int img_loaded = a_dot_tga;
-int spriteIndex = 1;
+int spriteIndex = 0;
 
 // Values for rotation. Base matrix rotation value and rotation frustrum.
 int rot_multiplier = 1;
@@ -62,19 +67,19 @@ void			my_input(void)
 {
     // IMG_MAX is the number of images you put into your cd root.
     // Cycle through all compiled images.
-    if  (jo_is_pad1_key_pressed(JO_KEY_A) && spriteIndex <= IMG_MAX)
+    if  (jo_is_pad1_key_down(JO_KEY_A) && spriteIndex < IMG_MAX)
     {
         spriteIndex++;
     }
-    else if (jo_is_pad1_key_pressed(JO_KEY_A) && spriteIndex > IMG_MAX)
+    else if (jo_is_pad1_key_down(JO_KEY_A) && spriteIndex > IMG_MAX)
     {
-        spriteIndex == 1;
+        spriteIndex == 0;
     }
-    else if (jo_is_pad1_key_pressed(JO_KEY_B) && spriteIndex >= 1)
+    else if (jo_is_pad1_key_down(JO_KEY_B) && spriteIndex >= 0)
     {
         spriteIndex--;
     }
-    else if (jo_is_pad1_key_pressed(JO_KEY_B) && spriteIndex < 1)
+    else if (jo_is_pad1_key_down(JO_KEY_B) && spriteIndex < 0)
     {
         spriteIndex == IMG_MAX;
     }
@@ -191,6 +196,7 @@ void			my_input(void)
     rot_z = 0;
     z = Z_BASE;
     }
+}
 
 void        my_draw(void)
 {
@@ -202,10 +208,10 @@ void        my_draw(void)
     jo_3d_rotate_matrix_x(rot_x);
     jo_3d_rotate_matrix_y(rot_y);
     jo_3d_rotate_matrix_z(rot_z);
-    jo_3d_draw_sprite(0);
+    jo_3d_create_sprite_quad (spriteIndex);
     jo_3d_pop_matrix();
 
-    // Clear screen line 2-5, because the numbers freak otherwise, when z value is updated.
+    // Clear screen line 2 and following, because the numbers freak otherwise, when z value is updated.
     // Don't clear line 0, because clearing is broke on line 0.
     jo_clear_screen_line(2);
     jo_clear_screen_line(3);
