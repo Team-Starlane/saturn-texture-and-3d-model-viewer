@@ -1,8 +1,8 @@
 #include <jo/jo.h>
 #include "ZT/ZT_COMMON.h"
-#include "vectors.h"
-#include "collision.h"
-#include "sort.h"
+//#include "vectors.h"
+//#include "collision.h"
+//#include "sort.h"
 #include "island.h"
 
 void IslandInitialize(void * currentAddress, int * lastEntityId, BlueSkiesIsland * island)
@@ -15,6 +15,8 @@ void IslandInitialize(void * currentAddress, int * lastEntityId, BlueSkiesIsland
     currentAddress = ztLoad3Dmodel((Sint8*)"IS00DS_G.ZTP", currentAddress, (*lastEntityId)++, false);
     currentAddress = ztLoad3Dmodel((Sint8*)"IS00DS_B.ZTP", currentAddress, (*lastEntityId)++, false);
     island->EntityCount = (*lastEntityId) - island->EntityId;
+
+/* Not using collision.
 
     // Prepare array for bounding boxes
     int totalBoxes = 0;
@@ -54,7 +56,7 @@ void IslandInitialize(void * currentAddress, int * lastEntityId, BlueSkiesIsland
 
     island->Colliders = (BoundingBox*)jo_malloc(sizeof(BoundingBox) * totalBoxes);
     island->ColliderCount = totalBoxes;
-    
+
     // Generate boxes
     int currentBox = 0;
 
@@ -139,6 +141,7 @@ void IslandHandleCollision(const BlueSkiesIsland * const island, int (*comparer)
     }
     while (hadCollision);
 }
+*/
 
 void IslandDraw(const BlueSkiesIsland * const island)
 {

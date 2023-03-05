@@ -9,8 +9,8 @@ typedef struct
 {
     int EntityId;
     int EntityCount;
-    BoundingBox * Colliders;
-    int ColliderCount;
+    //BoundingBox * Colliders;
+    //int ColliderCount;
     jo_vector_fixed Center;
 } BlueSkiesIsland;
 
