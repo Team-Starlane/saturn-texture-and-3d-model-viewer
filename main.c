@@ -209,8 +209,15 @@ void        my_draw(void)
     jo_3d_push_matrix();
     {
         // Set 3D matrix
-        ExGetMatrixToCoordinateSystem(&Camera, matrix);
+        
+        // Don't wanna use Reyes coordinate system.
+        // ExGetMatrixToCoordinateSystem(&Camera, matrix);
         slLoadMatrix(matrix);
+
+        jo_3d_translate_matrix_z(z);
+        jo_3d_rotate_matrix_x(rot_x);
+        jo_3d_rotate_matrix_y(rot_y);
+        jo_3d_rotate_matrix_z(rot_z);
 
         // Draw island
         IslandDraw(&Island);
