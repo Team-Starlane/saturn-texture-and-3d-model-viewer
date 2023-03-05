@@ -15,6 +15,7 @@ void IslandInitialize(void * currentAddress, int * lastEntityId, BlueSkiesIsland
     currentAddress = ztLoad3Dmodel((Sint8*)"IS00DS_G.ZTP", currentAddress, (*lastEntityId)++, false);
     currentAddress = ztLoad3Dmodel((Sint8*)"IS00DS_B.ZTP", currentAddress, (*lastEntityId)++, false);
     island->EntityCount = (*lastEntityId) - island->EntityId;
+}
 
 /* Not using collision.
 

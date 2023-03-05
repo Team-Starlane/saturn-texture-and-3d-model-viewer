@@ -16,7 +16,7 @@ typedef struct
 
 void IslandInitialize(void * currentAddress, int * lastEntityId, BlueSkiesIsland * island);
 
-void IslandHandleCollision(const BlueSkiesIsland * const island, int (*comparer)(void*, void*), const jo_vector_fixed * const camera, jo_vector_fixed * velocity);
+// void IslandHandleCollision(const BlueSkiesIsland * const island, int (*comparer)(void*, void*), const jo_vector_fixed * const camera, jo_vector_fixed * velocity);
 
 void IslandDraw(const BlueSkiesIsland * const island);
 
