@@ -212,7 +212,7 @@ void        my_draw(void)
         
         // Don't wanna use Reyes coordinate system.
         // ExGetMatrixToCoordinateSystem(&Camera, matrix);
-        slLoadMatrix(matrix);
+        // slLoadMatrix(matrix);
 
         jo_3d_translate_matrix_z(z);
         jo_3d_rotate_matrix_x(rot_x);
