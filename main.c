@@ -203,6 +203,26 @@ void			my_input(void)
 
 void        my_draw(void)
 {
+    // New ZTP draw code.
+    MATRIX matrix;
+    
+    jo_3d_push_matrix();
+    {
+        // Set 3D matrix
+        ExGetMatrixToCoordinateSystem(&Camera, matrix);
+        slLoadMatrix(matrix);
+
+        // Draw island
+        IslandDraw(&Island);
+        
+        // Draw water
+        //jo_background_3d_plane_a_draw(true);
+        //jo_background_3d_plane_b_draw(true);
+    }
+    jo_3d_pop_matrix();
+    
+    /* Old draw code
+
     // Setting palette every frame seems not to matter.
     // Push matrix, apply transformations from button inputs, draw sprite, pop matrix.
     jo_sprite_set_palette(palette1.id);
@@ -213,6 +233,8 @@ void        my_draw(void)
     jo_3d_rotate_matrix_z(rot_z);
     jo_3d_create_sprite_quad (spriteIndex);
     jo_3d_pop_matrix();
+
+    */
 
     // Clear screen line 2 and following, because the numbers freak otherwise, when z value is updated.
     // Don't clear line 0, because clearing is broke on line 0.
@@ -331,7 +353,8 @@ void			jo_main(void)
 {
 	jo_core_init(JO_COLOR_Black);
 
-    add_image_files();
+    LoadAssets();
+    // add_image_files();
     jo_core_add_callback(my_input);
     jo_core_add_callback(my_draw);
 
