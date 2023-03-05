@@ -54,6 +54,9 @@ int far = 1000;
 int near = 200;
 int frustrum = 20;
 
+/* Main island */
+static BlueSkiesIsland Island;
+
 // Reyes stuff.
 /*
 void            my_draw(void)
@@ -258,6 +261,38 @@ jo_palette      *my_tga_palette_handling(void)
             jo_create_palette(&palette6);
             return (&palette6);
         }
+}
+
+/** @brief Load assets
+ */
+void LoadAssets()
+{
+    jo_core_tv_off();
+
+    /* Not using RGB planes.
+    // set palette loading
+    jo_set_tga_palette_handling(Rgb0PaletteHandling);
+
+    // Enable RGB0
+    jo_enable_background_3d_plane(JO_COLOR_RGB(71,243,255));
+    
+    // Load water layer texture
+    jo_img_8bits img;
+    img.data = JO_NULL;
+    jo_tga_8bits_loader(&img, JO_ROOT_DIR, "WATER.TGA", 0);
+    jo_background_3d_plane_a_img(&img, Rgb0Palette.id, true, true);
+    jo_background_3d_plane_b_img(&img, Rgb0Palette.id, true, true);
+    jo_free_img(&img);
+    */
+
+	//	Start loading in LWRAM beginning
+    void * currentAddress = (void*)LWRAM;
+    int entityIds = 0;
+
+    // Load island model
+    IslandInitialize(currentAddress, &entityIds, &Island);
+
+    jo_core_tv_on();
 }
 
 void            add_image_files(void)
