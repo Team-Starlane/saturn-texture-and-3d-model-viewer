@@ -20,7 +20,8 @@
                 "JO_COMPILE_WITH_FS_SUPPORT=1"
             ],
             "cStandard": "c17",
-            "intelliSenseMode": "gcc-x64"
+            "intelliSenseMode": "gcc-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
         }
     ],
     "version": 4
