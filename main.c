@@ -38,7 +38,7 @@ void			my_input(void)
     {
         CurrentEntity++;
     }
-    else if (jo_is_pad1_key_down(JO_KEY_B) && CurrentEntity >= 0)
+    else if (jo_is_pad1_key_down(JO_KEY_X) && CurrentEntity >= 0)
     {
         CurrentEntity--;
     }
@@ -122,7 +122,7 @@ void			my_input(void)
         rot_z-=rot_multiplier;
     }
 
-    if (jo_is_pad1_key_pressed(JO_KEY_X) && Fov > FOV_MIN)
+    if (jo_is_pad1_key_pressed(JO_KEY_B) && Fov > FOV_MIN)
     {
         Fov -= FOV_STEP;
         slPerspective(Fov);
@@ -166,11 +166,11 @@ void        my_draw(void)
     // Don't clear line 0, because clearing is broke on line 0.
     jo_printf(0, 0, "Press Start to reset all values.         ");
     jo_printf(0, 2, "Z-depth (press C or Z): %d               ", z);
-    jo_printf(0, 3, "Model: %d/%d                             ", CurrentEntity + 1, TotalEntities);
+    jo_printf(0, 3, "Model (cycle with A and X): %d/%d        ", CurrentEntity + 1, TotalEntities);
     jo_printf(0, 4, "Rotat. on x (press Up or Down): %d       ", rot_x);
     jo_printf(0, 5, "Rotat. on y (press Left or Right): %d    ", rot_y);
     jo_printf(0, 6, "Rotat. on z (press L or R trigger): %d   ", rot_z);
-    jo_printf(0, 7, "FOV: %d                                  ", jo_fixed2int(slAng2FX(Fov)));
+    jo_printf(0, 7, "Field of View (press B or Y): %d         ", jo_fixed2int(slAng2FX(Fov)));
 }
 
 /** @brief Load assets
@@ -184,8 +184,8 @@ void LoadAssets()
     void * currentAddress = (void*)LWRAM;
     int entityIds = 0;
 
-    // Load models
-    // To add new ones just duplicate this line
+    // Load models.
+    // To add new ones, just duplicate this line.
     currentAddress = ztLoad3Dmodel((Sint8*)"IS00DS_G.ZTP", currentAddress, entityIds++, false);
 
     // Set our total model count
