@@ -1,3 +1,15 @@
+/*
+Concepts in C to read up upon for this model viewer as a beginner
+(use any search engine of choice and type in the topics listed here for further reading).
+
+#include statements > referencing code from different .c files
+by taking them from .h lists.
+The meaning of bracketing in #include statements.
+	
+Example: 
+https://learn.microsoft.com/en-us/cpp/preprocessor/hash-include-directive-c-cpp?view=msvc-170
+*/
+
 #include <jo/jo.h>
 // Include everything this .h file lists, which is XL2's entire ZTP library.
 // Take it from this subfolder.
@@ -25,11 +37,13 @@ int neg_frust_ext = -180;
 int pos_frust_ext = 180;
 
 // Values for z-depth.
-#define Z_BASE 75
+#define Z_BASE 500
 int z = Z_BASE;
 int far = 1000;
 int near = 200;
 int frustrum = 20;
+
+jo_img bg;
 
 void			my_input(void)
 {
@@ -122,6 +136,7 @@ void			my_input(void)
         rot_z-=rot_multiplier;
     }
 
+	// FOV > Field of view.
     if (jo_is_pad1_key_pressed(JO_KEY_B) && Fov > FOV_MIN)
     {
         Fov -= FOV_STEP;
@@ -140,6 +155,7 @@ void			my_input(void)
         rot_y = 0;
         rot_z = 0;
         z = Z_BASE;
+		Fov = (DEGtoANG(70));
     }
 }
 
@@ -177,6 +193,12 @@ void        my_draw(void)
  */
 void LoadAssets()
 {
+    // Load background.
+    bg.data = NULL;
+    jo_tga_loader(&bg, JO_ROOT_DIR, "GRID.TGA", JO_COLOR_Transparent);
+    jo_set_background_sprite(&bg, 96, 56);
+    jo_free_img(&bg);
+
     // Set default perspective
     slPerspective(Fov);
 
@@ -187,6 +209,10 @@ void LoadAssets()
     // Load models.
     // To add new ones, just duplicate this line.
     currentAddress = ztLoad3Dmodel((Sint8*)"IS00DS_G.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"testdsp1.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"testdsp2.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"testlod1.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"testlod2.ZTP", currentAddress, entityIds++, false);
 
     // Set our total model count
     TotalEntities = entityIds;
