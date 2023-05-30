@@ -209,10 +209,10 @@ void LoadAssets()
     // Load models.
     // To add new ones, just duplicate this line.
     currentAddress = ztLoad3Dmodel((Sint8*)"IS00DS_G.ZTP", currentAddress, entityIds++, false);
-	currentAddress = ztLoad3Dmodel((Sint8*)"testdsp1.ZTP", currentAddress, entityIds++, false);
-	currentAddress = ztLoad3Dmodel((Sint8*)"testdsp2.ZTP", currentAddress, entityIds++, false);
-	currentAddress = ztLoad3Dmodel((Sint8*)"testlod1.ZTP", currentAddress, entityIds++, false);
-	currentAddress = ztLoad3Dmodel((Sint8*)"testlod2.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"TESTDSP1.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"TESTDSP2.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"TESTLOD1.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"TESTLOD2.ZTP", currentAddress, entityIds++, false);
 
     // Set our total model count
     TotalEntities = entityIds;
