@@ -213,6 +213,8 @@ void LoadAssets()
 	currentAddress = ztLoad3Dmodel((Sint8*)"TESTDSP2.ZTP", currentAddress, entityIds++, false);
 	currentAddress = ztLoad3Dmodel((Sint8*)"TESTLOD1.ZTP", currentAddress, entityIds++, false);
 	currentAddress = ztLoad3Dmodel((Sint8*)"TESTLOD2.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"TESTLOD3.ZTP", currentAddress, entityIds++, false);
+	currentAddress = ztLoad3Dmodel((Sint8*)"TESTLOD4.ZTP", currentAddress, entityIds++, false);
 
     // Set our total model count
     TotalEntities = entityIds;
